@@ -32,7 +32,7 @@ def get_args():
     parser.add_argument('--batch_size', type=int, default=64, help='input batch size for training')
     parser.add_argument('--test_batch_size', type=int, default=512, help='batch size for validation or test')
     parser.add_argument('--lr', type=float, default=0.01, help='learning rate')
-    parser.add_argument('--scheduler', default='cosine', help='scheduler for rounds [linear, cosine, step, None]')
+    parser.add_argument('--scheduler', default='step', help='scheduler for rounds [linear, cosine, step, None]')
     parser.add_argument('--schedule_round', type=int, nargs='+', default=[250])
     parser.add_argument('--lr_gamma', type=float, default=0.1)
     parser.add_argument('--eta_min', type=float, default=0.0, help='minimum learning rate')
@@ -40,7 +40,7 @@ def get_args():
     parser.add_argument('--reg', type=float, default=1e-3, help="L2 regularization strength")
 
     #### Federated learning settings
-    parser.add_argument('--partition', default='noniid', help='iid, noniid')
+    parser.add_argument('--partition', default='noniid', help='iid, noniid, noniid_balanced')
     parser.add_argument('--alg', default='fedavg', help='communication strategy: fedavg/fedprox/fedavg_fa')
     parser.add_argument('--round', type=int, default=500, help='number of maximum communication round')
     parser.add_argument('--n_clients', type=int, default=100, help='number of workers in a distributed cluster')
@@ -69,7 +69,7 @@ def get_args():
 
     ## FedDecorr
     parser.add_argument('--feddecorr', action='store_true')
-    parser.add_argument('--feddecorr_coef', type=float, default=0.1)
+    parser.add_argument('--feddecorr_coef', type=float, default=0.01)
 
     args = parser.parse_args()
     return args
