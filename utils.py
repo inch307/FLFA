@@ -62,26 +62,7 @@ def init_logger(args):
     return logger, log_file_name
 
 def get_global_dataset(args):
-    if args.dataset == 'mnist':
-        normalize = transforms.Normalize(mean=[0.1307], std=[0.3081])
-        
-        transform_train = transforms.Compose([
-                # transforms.ToPILImage(),
-                transforms.RandomCrop(28, padding=4),
-                transforms.RandomHorizontalFlip(),
-                transforms.ToTensor(),
-                normalize
-            ])
-        # test set data prep
-        transform_test = transforms.Compose([
-                transforms.ToTensor(),
-                normalize])
-        
-        train_ds = MNIST_truncated(args.datadir, train=True, transform=transform_train, download=True)
-        val_ds = None
-        test_ds = MNIST_truncated(args.datadir, train=False, transform=transform_test, download=True)
-
-    elif args.dataset == 'fmnist':
+    if args.dataset == 'fmnist':
         normalize = transforms.Normalize(mean=[0.2860], std=[0.3530])
         
         transform_train = transforms.Compose([
@@ -140,23 +121,6 @@ def get_global_dataset(args):
         train_ds = CIFAR100_truncated(args.datadir, train=True, transform=transform_train, download=True)
         val_ds = None
         test_ds = CIFAR100_truncated(args.datadir, train=False, transform=transform_test, download=True)
-    
-    elif args.dataset == 'tinyimagenet':
-        transform_train = transforms.Compose([
-            transforms.RandomCrop(64, padding=4),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(10),
-            transforms.ToTensor(),
-            transforms.Normalize((0.4802,0.4481,0.3975), (0.2770,0.2691,0.2821)),
-        ])
-        transform_test = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.4802,0.4481,0.3975), (0.2770,0.2691,0.2821)),
-        ])
-
-        train_ds = ImageFolder_custom(os.path.join(args.datadir, 'train'), transform=transform_train)
-        val_ds = None
-        test_ds = ImageFolder_custom(os.path.join(args.datadir, 'val'), transform=transform_test)
     
     return train_ds, val_ds, test_ds
 
