@@ -2,7 +2,7 @@ import torch
 import torch.utils.data as data
 import numpy as np
 import torchvision
-from torchvision.datasets import FashionMNIST  # MNIST 대신 FashionMNIST 사용
+from torchvision.datasets import FashionMNIST 
 from torchvision import transforms
 from PIL import Image
 

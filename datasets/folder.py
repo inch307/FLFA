@@ -11,13 +11,11 @@ class ImageFolder_custom(DatasetFolder):
 
         imagefolder_obj = ImageFolder(self.root, transform=self.transform, target_transform=self.target_transform)
         self.loader = imagefolder_obj.loader
-        
-        # ImageFolder의 samples는 (path, label) 튜플 리스트입니다.
+
         samples = imagefolder_obj.samples
         if self.dataidxs is not None:
             samples = [samples[i] for i in self.dataidxs]
-        
-        # samples를 분리하여 self.data (이미지 경로)와 self.target (레이블 배열)로 저장합니다.
+
         self.data = [s[0] for s in samples]
         self.target = np.array([s[1] for s in samples])
 
