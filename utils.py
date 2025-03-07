@@ -13,7 +13,6 @@ from torchvision import transforms
 
 from datasets.cifar10 import CIFAR10_truncated
 from datasets.cifar100 import CIFAR100_truncated
-from datasets.mnist import MNIST_truncated
 from datasets.fmnist import FashionMNIST_truncated
 from datasets.folder import ImageFolder_custom
 from datasets.wrapper import AugmentedDatasetWrapper
