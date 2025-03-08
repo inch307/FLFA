@@ -138,7 +138,7 @@ class ResNetCifar10(nn.Module):
 
     def __init__(self, block, layers, in_channels=3, num_classes=1000, zero_init_residual=False,
                  groups=1, width_per_group=64, replace_stride_with_dilation=None,
-                 norm_layer=None, pre_fa=False, post_fa=False, random_fa=False):
+                 norm_layer=None, pre_fa=False, post_fa=False):
         super(ResNetCifar10, self).__init__()
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
@@ -187,11 +187,8 @@ class ResNetCifar10(nn.Module):
                 nn.init.kaiming_normal_(m.weight, mode='fan_in', nonlinearity='relu')
                 if m.bias is not None:
                     nn.init.constant_(m.bias, 0)
-                if random_fa:
-                    nn.init.kaiming_normal_(m.B, mode='fan_in', nonlinearity='relu')
-                else:
-                    with torch.no_grad():
-                        m.B.copy_(m.weight.data.clone())
+                with torch.no_grad():
+                    m.B.copy_(m.weight.data.clone())
             if isinstance(m, (nn.BatchNorm2d, nn.GroupNorm)):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
