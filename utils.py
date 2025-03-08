@@ -270,7 +270,7 @@ def init_nets(dataset, num_nets, args, device='cpu', base=False):
             if base:
                 net = resnet_cifar_fa.ResNet50_cifar10_fa(in_channels=args.in_channels, num_classes=num_classes, norm_layer=norm_layer, pre_fa=False, post_fa=False)
             else:    
-                net = resnet_cifar_fa.ResNet50_cifar10_fa(in_channels=args.in_channels, num_classes=num_classes, norm_layer=norm_layer, pre_fa=args.pre_fa, post_fa=args.post_fa, random_fa=args.random_fa)
+                net = resnet_cifar_fa.ResNet50_cifar10_fa(in_channels=args.in_channels, num_classes=num_classes, norm_layer=norm_layer, pre_fa=args.pre_fa, post_fa=args.post_fa)
         else:
             raise ValueError('wrong model config')
         net.to(device)

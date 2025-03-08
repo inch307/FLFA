@@ -57,7 +57,6 @@ def get_args():
     parser.add_argument('--pre_fa', action='store_true')
     parser.add_argument('--post_fa', action='store_true')
     parser.add_argument('--sync_round', type=int, default=1)
-    parser.add_argument('--random_fa', action='store_true')
     parser.add_argument('--no_scale', action='store_true')
 
     ## Fedprox or MOON
@@ -99,10 +98,9 @@ def main():
     global_model = init_nets(global_train_dataset, 1, args, device)[0]
     base_w = base_global_model.state_dict()
     global_model.load_state_dict(base_w, strict=False)
-    if not args.random_fa:
-        if args.pre_fa or args.post_fa:
-            print('initial sync')
-            fa_utils.sync_B(global_model, args, args.sync_round)
+    if args.pre_fa or args.post_fa:
+        print('initial sync')
+        fa_utils.sync_B(global_model, args, args.sync_round)
 
     client_nets = init_nets(global_train_dataset, args.n_clients, args, device)
 
