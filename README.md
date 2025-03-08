@@ -8,7 +8,7 @@ Ensure you have the necessary dependencies installed before running the experime
 pip install -r requirements.txt
 ```
 This code is compatible with Python 3.11.7
-You need to install the version of PyTorch that is compatible with your version.
+You may need to install the version of PyTorch that is compatible with your version.
 
 ## Reproducing the Experiments
 
