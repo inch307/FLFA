@@ -68,7 +68,7 @@ def get_args():
 
     ## FedDecorr
     parser.add_argument('--feddecorr', action='store_true')
-    parser.add_argument('--feddecorr_coef', type=float, default=0.01)
+    parser.add_argument('--feddecorr_coef', type=float, default=0.1)
 
     args = parser.parse_args()
     return args
